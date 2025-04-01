@@ -1,0 +1,475 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #D1F2EB; 
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #50C878; 
+    font-weight: 500;
+}
+
+.logo-header {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 2px solid #50C878;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.text-container {
+    max-width: 800px;
+    padding-left: 15px;
+    text-align: justify;
+}
+
+.larger-doctors-img {
+    max-width: 500px; 
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.larger-doctors-img:hover {
+    transform: scale(1.02);
+}
+
+.smaller-logo {
+    max-width: 100px; 
+    width: auto;
+    height: auto;
+}
+
+.card {
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto; 
+    height: auto;
+    background-color: #ffffff;
+    border: 1px solid #50C878; 
+    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.2); 
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.card-2 {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    overflow: hidden;
+    word-wrap: break-word;
+    padding: 20px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-2 .card-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.card-2 .card-text {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.card-2 .card-body {
+    max-height: 400px; 
+    overflow-y: auto;
+}
+
+.card, .card-2 {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    margin: 0 auto 15px auto;
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: 1px solid #50C878;
+    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.2);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-2 .list-group {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.card-2 .card-body {
+    max-height: none; 
+}
+
+.list-group {
+    margin-top: 10px;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.list-group-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px;
+}
+
+.list-group-item:nth-child(even) {
+    background: #f1f1f1;
+}
+
+.list-group-item:hover {
+    background: #e0e0e0;
+}
+
+.list-group-item .btn-group {
+    display: flex;
+    align-self: flex-start;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.list-group-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-group-item span.record-text {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-wrap: break-word;
+    max-width: 90%; 
+}
+
+img.img-center {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 700px; 
+    height: auto;
+    border-radius: 20px; 
+    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.3); 
+}
+
+/* Carousel Concept Implementation */
+.carousel-item img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.carousel-inner {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Styling for Chart Grid */
+#recordsChart {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    gap: 15px; 
+}
+
+#recordsChart .col {
+    width: 100%;
+    margin-bottom: 10px;
+    flex: 1 1 100%;
+}
+.record-text {
+    text-align: justify;
+    display: block;
+}
+
+#categoryList, #categoryList a, #categoryList li {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-left: 4px solid #0B6E4F;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#categoryList a:hover, #categoryList li:hover {
+    background: rgba(11, 110, 79, 0.9);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(11, 110, 79, 0.3);
+}
+
+#categoryList a, #categoryList li {
+    font-size: 18px;
+    margin-bottom: 8px;
+    background-color: #D1F2EB; 
+    border-left: 4px solid #0B6E4F; 
+    padding: 12px;
+    border-radius: 6px;
+}
+
+#categoryList a {
+    font-size: 18px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.1); 
+    border-left: 4px solid #0B6E4F;
+    padding: 12px;
+    border-radius: 8px;
+    color: #0B6E4F;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#categoryList a:hover {
+    background: rgba(11, 110, 79, 0.9); 
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(11, 110, 79, 0.3); 
+}
+
+#categoryList li {
+    font-size: 18px;
+    margin-bottom: 8px;
+    background-color: #D1F2EB; 
+    border-left: 4px solid #0B6E4F; 
+    padding: 12px;
+    border-radius: 6px;
+}
+
+#categoryList a, #categoryList li {
+    font-size: 18px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.1); 
+    border-left: 4px solid #0B6E4F; 
+    padding: 12px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px); 
+    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.1); 
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.badge {
+    font-size: 14px;
+    padding: 8px 12px;
+    background-color: #0B6E4F; 
+    color: #ffffff; 
+    border-radius: 12px;
+}
+
+.btn-primary {
+    background-color: #50C878; 
+    border-color: #50C878;
+}
+
+.btn-primary:hover {
+    background-color: #0B6E4F; 
+    border-color: #0B6E4F;
+}
+
+.form-control:focus {
+    border-color: #50C878;
+    box-shadow: 0 0 5px rgba(80, 200, 120, 0.5);
+}
+
+#logoutBtn {
+    background-color: #dc3545; 
+    border-color: #dc3545;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+#logoutBtn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Responsive Layout */
+
+/* Small Devices: Phones (max-width: 576px) */
+@media (max-width: 576px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .d-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+    }
+
+    .list-group-item span.record-text {
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .list-group-item .btn-group {
+        align-self: flex-end;
+    }
+
+    .text-container {
+        padding-left: 0;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .larger-doctors-img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .smaller-logo {
+        max-width: 80px;
+        margin-bottom: 10px;
+    }
+
+    /* Ensure card is centered and does not overflow */
+    .card, .card-2 {
+        width: 95%;
+        max-width: 100%;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    #recordsChart {
+        width: 100%;
+        gap: 12px;
+    }
+
+    #recordsChart .col {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #categoryList {
+        width: 100%;
+        padding: 0;
+    }
+
+    #categoryList a, #categoryList li {
+        width: 100%;
+    }
+
+    .list-group-item {
+        width: 100%;
+        padding: 12px;
+    }
+
+    #logoutBtn {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+}
+
+/* Medium Devices: Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+
+    .card, .card-2 {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    #recordsChart .col {
+        width: 100%;
+    }
+
+    .d-md-flex {
+        display: flex;
+    }
+
+    .flex-md-column {
+        flex-direction: column;
+    }
+}
+
+/* Large Devices: Laptops & Desktops (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        width: 100%;
+    }
+
+    .card, .card-2 {
+        width: 100%;
+        max-width: 95%;
+    }
+
+    #recordsChart .col {
+        width: 100%;
+    }
+
+    .d-lg-flex {
+        display: flex;
+    }
+
+    .flex-lg-row {
+        flex-direction: row;
+    }
+}
+
+/* Extra Large Devices: Desktops (above 1200px) */
+@media (min-width: 1200px) {
+    .container {
+        width: 100%;
+    }
+
+    .card {
+        max-width: 900px;
+    }
+
+    #recordsChart .col {
+        width: 100%;
+    }
+
+    .d-xl-flex {
+        display: flex;
+    }
+
+    .flex-xl-row {
+        flex-direction: row;
+    }
+}

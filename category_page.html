@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Miky Medical Hospital | Category</title>
+
+        <!-- Favicon -->
+        <link rel="android-chrome" sizes="512x512" href="img/favicon_io/android-chrome-512x512.png">
+        <link rel="android-chrome" sizes="192x192" href="img/favicon_io/android-chrome-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
+        <link rel="icon" type="image/x-icon" href="img/favicon_io/favicon.ico">
+        <link rel="manifest" href="img/favicon_io/site.webmanifest">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <!-- External CSS Integration -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!-- Integrating jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+        <!-- Font Awesome for Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    <body>
+        <!-- Main Container -->
+        <main class="container mt-4">
+            <section class="card p-4 shadow-lg mb-4">
+                <!-- Logo and Header -->
+                <div class="logo-header text-center mb-4">
+                    <img src="img/miky-logo.png" alt="Miky Logo" class="img-fluid" style="width: 150px; height: auto;">
+                </div>
+
+                <!-- Category Title and Description -->
+                <h2 class="text-center" id="categoryTitle">Loading...</h2>
+                <p class="text-muted text-center" id="categoryDescription">Details about the selected category will appear here.</p>
+
+                <!-- Add New Record Section -->
+                <div class="mt-4">
+                    <h5>Add New Record</h5>
+                    <div class="form-group mb-3">
+                        <label for="categorySelect">Select Category</label>
+                        <select id="categorySelect" class="form-select">
+                            <option value="Patient Records">Patient Records</option>
+                            <option value="Doctor Profiles">Doctor Profiles</option>
+                            <option value="Appointments">Appointments</option>
+                            <option value="Emergency Cases">Emergency Cases</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="recordInput">Enter Record Details</label>
+                        <input type="text" id="recordInput" class="form-control" placeholder="Enter record details...">
+                    </div>
+
+                    <button class="btn btn-primary w-100" id="saveRecordBtn">Save Record</button>
+                </div>
+
+                <!-- Category Records Chart Section -->
+                <div class="mt-5">
+                    <h5 class="text-center">Category Records Chart</h5>
+                    <div id="recordsChart" class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+                        <!-- Records will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Go Back Button -->
+                <div class="text-center mt-4">
+                    <a href="badges_lab.html" class="btn btn-success">Go Back to Dashboard</a>
+                </div>                
+            </section>
+        </main>
+
+        <!-- Toast Container -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="recordToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header" id="toastHeader">
+                    <strong class="me-auto" id="toastTitle">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                
+                <div class="toast-body" id="toastMessage">
+                    Action completed successfully.
+                </div>
+            </div>
+        </div>
+
+        <!-- Integrating Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <!-- Integrating External JS -->
+        <script src="assets/js/badges.js"></script>
+        <script src="assets/js/category.js"></script>
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>

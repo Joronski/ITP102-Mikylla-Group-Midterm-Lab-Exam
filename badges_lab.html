@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Miky Medical Hospital | Dashboard</title>
+
+        <!-- Favicon -->
+        <link rel="android-chrome" sizes="512x512" href="img/favicon_io/android-chrome-512x512.png">
+        <link rel="android-chrome" sizes="192x192" href="img/favicon_io/android-chrome-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
+        <link rel="icon" type="image/x-icon" href="img/favicon_io/favicon.ico">
+        <link rel="manifest" href="img/favicon_io/site.webmanifest">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <!-- External CSS Integration -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!-- Integrating jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- Main Section Container -->
+        <main class="container mt-5 mb-5">
+            <!-- Hospital Header Section -->
+            <header class="header d-flex justify-content-between align-items-center mb-4">
+                <!-- Logo and Title -->
+                <div class="d-flex align-items-center">
+                    <img src="img/miky-logo.png" alt="Miky Logo" class="me-3 logo-img smaller-logo">
+                    <h3 class="mb-0" style="color: #0B6E4F;">Miky Medical Hospital</h3>
+                </div>
+
+                <!-- Logout Button -->
+                <button id="logoutBtn" class="btn btn-danger">Log Out</button>
+            </header>            
+
+            <h1 class="text-center mt-4 mb-4">Dashboard</h1>
+
+            <!-- Main Content -->
+            <section class="d-flex align-items-center justify-content-between mb-4">
+                <!-- Image Section with Larger Styling -->
+                <img src="img/doctors-nurses.jpg" alt="Doctors and Nurses" class="larger-doctors-img me-4">
+
+                <!-- Description Content -->
+                <div class="text-container">
+                    <h4 class="text-primary fw-bold mb-2">Welcome to Miky Medical Hospital</h4>
+                    <p class="text-muted mb-0">
+                        Miky Medical Hospital Management System helps manage patient records, doctor profiles, appointments, 
+                        and emergency cases seamlessly. It ensures a secure and organized workflow for hospital staff and patients.
+                    </p>
+                </div>
+            </section>
+
+            <ul id="categoryList" class="list-group">
+                <!-- Categories and Badges will be populated dynamically here -->
+            </ul>
+
+            <h1 class="text-center mt-4 mb-4">About Us</h1>
+            <p class="text-center mt-2 mb-2">This is our Output for our Midterm Laboratory Examination in Integrative Programming and Technologies course. Our group is composed of dedicated individuals who are committed to academic excellence and collaborative learning. Each member brings a unique set of skills and perspectives, contributing to a dynamic and productive environment. Through teamwork, critical thinking, and continuous learning, we strive to enhance our knowledge and apply it effectively in practical settings. As we progress, we aim to foster a culture of innovation and academic integrity, ensuring that our collective efforts lead to meaningful outcomes.</p>
+
+            <section class="container mt-5">
+                <h2 class="text-center mb-4">Members of the Group</h2>
+                <div id="aboutCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Member 1 -->
+                        <div class="carousel-item active">
+                            <img src="img/members-img/liezel.jpg" alt="Member 1: Liezel">
+                            <h4 class="mt-3">Liezel Abiera Carpio</h4>
+                            <p class="text-muted">Documentation</p>
+                            <p>She's responsible for accurately explaining the system flow of the project, providing detailed documentation of how the system operates, its components, and how they interact within the broader architecture. This includes outlining the processes, workflows, and interactions within the system, ensuring that each step of the system flow is clearly articulated. Additionally, the Documentator is tasked with providing an in-depth overview of the technical stack used in the project, detailing the technologies, frameworks, programming languages, and tools employed.</p>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="carousel-item">
+                            <img src="img/members-img/miky.jpg" alt="Member 2: Miky">
+                            <h4 class="mt-3">Mikylla De Leon</h4>
+                            <p class="text-muted">Leader</p>
+                            <p>She's responsible for guiding the team towards the successful completion of the project, ensuring that goals are met within the designated time frame</p>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="carousel-item">
+                            <img src="img/members-img/rolly.jpg" alt="Member 3: Rolly">
+                            <h4 class="mt-3">John Rolly Naron</h4>
+                            <p class="text-muted">Brand Designer</p>
+                            <p>He's responsible for shaping and defining the visual identity of a brand, ensuring it communicates the desired message and resonates with the target audience. He develops key elements such as logos, color schemes, typography, and imagery, ensuring consistency in all visual materials.</p>
+                        </div>
+
+                        <!-- Member 4 -->
+                        <div class="carousel-item">
+                            <img src="img/members-img/ermina.jpg" alt="Member 4: Ermina">
+                            <h4 class="mt-3">Ermina Obsequio</h4>
+                            <p class="text-muted">Documentation</p>
+                            <p>She's responsible for accurately explaining the system flow of the project, providing detailed documentation of how the system operates, its components, and how they interact within the broader architecture. This includes outlining the processes, workflows, and interactions within the system, ensuring that each step of the system flow is clearly articulated. Additionally, the Documentator is tasked with providing an in-depth overview of the technical stack used in the project, detailing the technologies, frameworks, programming languages, and tools employed.</p>
+                        </div>
+
+                        <!-- Member 5 -->
+                        <div class="carousel-item">
+                            <img src="img/members-img/joron.jpg" alt="Member 5: Joron">
+                            <h4 class="mt-3">Joaquin Aaron Recio</h4>
+                            <p class="text-muted">Lead Programmer/Developer</p>
+                            <p>He plays a pivotal role in the technical execution of the project, overseeing the design, development, and implementation of the system's architecture and features. He ensures that coding standards are followed, the system is optimized for performance as best as it can, and that best practices in software development are consistently applied.</p>
+                        </div>
+                    </div>
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Footer Section -->
+            <footer class="text-muted text-center py-3 mt-5">
+                <div class="container">
+                    <p class="mb-0">© 2025 Mikylla Group. All Rights Reserved.</p>
+                </div>
+            </footer>
+
+        </main>
+
+        <!-- Integrating Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <!-- Integrating External JS -->
+        <script src="assets/js/category.js"></script>
+
+        <!-- Integrating Internal JS -->
+        <script>
+            $(document).ready(function () {
+                // Load data from localStorage instead of PHP
+                loadCategoriesFromLocalStorage();
+                
+                // Populate categories with dynamic badges
+                function loadCategoriesFromLocalStorage() {
+                    const categoryList = $("#categoryList");
+                    categoryList.empty(); // Clear existing items first
+                    
+                    // Get data from localStorage
+                    const categoryData = JSON.parse(localStorage.getItem("categoryData")) || {
+                        "Patient Records": [],
+                        "Doctor Profiles": [],
+                        "Appointments": [],
+                        "Emergency Cases": []
+                    };
+                    
+                    // Populate the list with categories and badges
+                    for (const category in categoryData) {
+                        const recordCount = categoryData[category].length;
+                        
+                        // Determine badge color based on category name
+                        let badgeColor = "#ffc107"; // Default yellow
+                        
+                        if (category.includes("Patient Records")) {
+                            badgeColor = "#17a2b8"; // Info blue
+                        } else if (category.includes("Doctor Profiles")) {
+                            badgeColor = "#007bff"; // Primary blue
+                        } else if (category.includes("Appointment")) {
+                            badgeColor = "#ffc107"; // Warning yellow
+                        } else if (category.includes("Emergency Cases")) {
+                            badgeColor = "#dc3545"; // Danger red
+                        }
+                        
+                        // Create HTML string with Bootstrap badge styling
+                        const listItemHtml = `
+                            <a href="category_page.html?category=${encodeURIComponent(category)}"
+                               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                ${category}
+                                <span class="badge rounded-pill" style="background-color: ${badgeColor}; font-family: 'Poppins', sans-serif; font-weight: bold;">${recordCount}</span>
+                            </a>`;
+                        
+                        categoryList.append(listItemHtml);
+                    }
+                }
+                
+                // Logout functionality
+                $("#logoutBtn").on("click", function () {
+                    // Redirect to index.html on logout
+                    window.location.href = "index.html";
+                });
+            });
+        </script>
+    </body>
+</html>
