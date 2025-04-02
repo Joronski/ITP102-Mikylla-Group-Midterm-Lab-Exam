@@ -1,4 +1,12 @@
-// Function to update badges for all categories
+/**
+ * badges.js - Badge management for medical records categories
+ * Handles the display and updating of numerical badges on category links
+ */
+
+/**
+ * Updates numerical badges for all categories based on record counts
+ * Fetches counts from localStorage and updates UI elements
+ */
 function updateCategoryBadges() {
     // Get data from localStorage
     const categoryData = JSON.parse(localStorage.getItem("categoryData")) || {
@@ -8,22 +16,26 @@ function updateCategoryBadges() {
         "Emergency Cases": []
     };
     
-    // Update the badge counts in the UI
+    // Update the badge counts in the UI for each category
     for (const category in categoryData) {
         const recordCount = categoryData[category].length;
         
-        // Find the badge element for this category and update it
+        // Find and update the badge element for this category
         $(`#categoryList a`).each(function() {
             const linkText = $(this).text().trim().replace(/\d+$/, '').trim();
             if (linkText === category) {
-                // Find the badge inside this link and update its text
+                // Update badge text with current record count
                 $(this).find('.badge').text(recordCount);
             }
         });
     }
 }
 
-// Function to get badge color based on category name
+/**
+ * Determines the appropriate badge color based on category name
+ * @param {String} category - Category name
+ * @returns {String} CSS color value for the badge
+ */
 function getBadgeColorForCategory(category) {
     if (category.includes("Patient Records")) {
         return "#17a2b8"; // Info blue
@@ -43,6 +55,7 @@ $(document).ready(function() {
     updateCategoryBadges();
     
     // Set up observer to update badges when localStorage changes
+    // This ensures badges stay in sync if data is modified in another tab/window
     window.addEventListener('storage', function(e) {
         if (e.key === 'categoryData') {
             updateCategoryBadges();
