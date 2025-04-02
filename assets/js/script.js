@@ -1,48 +1,70 @@
-// Initialize categories in localStorage if not set
-if (!localStorage.getItem("categoryData")) {
-    const initialData = {
-        "Patient Records": [],
-        "Doctor Profiles": [],
-        "Appointments": [],
-        "Emergency Cases": []
-    };
-    localStorage.setItem("categoryData", JSON.stringify(initialData));
+/**
+ * script.js - Main application logic for medical records system
+ * Handles record management (create, read, update, delete operations),
+ * UI interactions, and notifications
+ */
+
+/**
+ * Initialize categories in localStorage if not already set
+ */
+function initializeLocalStorage() {
+    if (!localStorage.getItem("categoryData")) {
+        const initialData = {
+            "Patient Records": [],
+            "Doctor Profiles": [],
+            "Appointments": [],
+            "Emergency Cases": []
+        };
+        localStorage.setItem("categoryData", JSON.stringify(initialData));
+    }
 }
 
-// Function to save record to localStorage
+/**
+ * Saves a new record to the selected category
+ * Validates input, updates localStorage, and refreshes UI
+ */
 function saveRecord() {
     const category = $("#categorySelect").val();
     const record = $("#recordInput").val().trim();
 
+    // Validation
     if (record === "") {
         alert("Please enter record details.");
         return;
     }
 
+    // Update localStorage
     const categoryData = JSON.parse(localStorage.getItem("categoryData"));
     categoryData[category].push(record);
     localStorage.setItem("categoryData", JSON.stringify(categoryData));
 
+    // Update UI
     $("#recordInput").val(""); // Clear input field
     loadChart(); // Refresh chart
-
-    // After saving the record and refreshing the chart, update badges
+    
+    // Show success notification
+    showToast("Record Saved", `Successfully added new record to ${category}`, "success");
+    
+    // Update badges if function exists
     if (typeof updateCategoryBadges === 'function') {
         updateCategoryBadges();
     }
 }
 
-// Function for stable category display with icons and modular structure
+/**
+ * Loads and displays all records in a chart view
+ * Shows records grouped by category with actions
+ */
 function loadChart() {
     const categoryData = JSON.parse(localStorage.getItem("categoryData"));
     const recordsChart = $("#recordsChart");
     recordsChart.empty();
 
-    // Get the selected category from the URL to compare
+    // Get the selected category from the URL for comparison
     const urlParams = new URLSearchParams(window.location.search);
     const selectedCategory = urlParams.get("category");
 
-    // Iterate through each category and generate its card
+    // Generate UI for each category
     for (const category in categoryData) {
         const records = categoryData[category];
         const recordCount = records.length;
@@ -65,6 +87,13 @@ function loadChart() {
     }
 }
 
+/**
+ * Generates HTML list of records for a specific category
+ * @param {Array} records - Array of record strings
+ * @param {String} category - Category name
+ * @param {String} selectedCategory - Currently selected category
+ * @returns {String} HTML string for records list
+ */
 function generateRecordList(records, category, selectedCategory) {
     let recordsHTML = "";
     const isDisabled = selectedCategory && category !== selectedCategory;
@@ -103,8 +132,14 @@ function generateRecordList(records, category, selectedCategory) {
     return recordsHTML;
 }
 
-
-// Generate a single list item with Edit and Delete buttons
+/**
+ * Generates HTML for a single record item
+ * @param {String} record - Record content
+ * @param {String} category - Category name
+ * @param {Number} index - Record index
+ * @param {String} selectedCategory - Currently selected category
+ * @returns {String} HTML string for a record item
+ */
 function generateRecordItem(record, category, index, selectedCategory) {
     const isDisabled = category !== selectedCategory ? "disabled" : "";
     return `
@@ -123,7 +158,16 @@ function generateRecordItem(record, category, index, selectedCategory) {
     `;
 }
 
-// Generate a button dynamically
+/**
+ * Generates HTML for an action button
+ * @param {String} action - Button action (edit/delete)
+ * @param {String} btnClass - Button style class
+ * @param {String} iconClass - Icon class
+ * @param {String} category - Category name
+ * @param {Number} index - Record index
+ * @param {String} isDisabled - Disabled attribute if needed
+ * @returns {String} HTML string for button
+ */
 function generateButton(action, btnClass, iconClass, category, index, isDisabled) {
     return `
         <button 
@@ -137,143 +181,20 @@ function generateButton(action, btnClass, iconClass, category, index, isDisabled
     `;
 }
 
-// Capitalize the first letter of a word (for button titles)
+/**
+ * Capitalizes the first letter of a word
+ * @param {String} word - Word to capitalize
+ * @returns {String} Capitalized word
+ */
 function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-
-$(document).ready(function () {
-    loadChart();
-
-    // Set category title dynamically
-    const urlParams = new URLSearchParams(window.location.search);
-    const categoryName = urlParams.get("category");
-
-    if (categoryName) {
-        $("#categoryTitle").text(categoryName);
-        $("#categoryDescription").text("Displaying records for " + categoryName + ".");
-
-        // Disable select and allow only the specified category dynamically
-        const allowedCategory = categoryName; // Get category from URL
-        $("#categorySelect option").each(function () {
-            if ($(this).val() !== allowedCategory) {
-                $(this).prop("disabled", true); // Disable other options
-            } else {
-                $(this).prop("selected", true); // Select the allowed category
-            }
-        });
-
-        // Disable the entire select to prevent changes
-        $("#categorySelect").prop("disabled", true);
-
-        // Prevent invalid category access and redirect
-        if (!["Patient Records", "Doctor Profiles", "Appointments", "Emergency Cases"].includes(allowedCategory)) {
-            alert("Invalid category selected. Redirecting to dashboard.");
-            window.location.href = "badges_lab.html";
-        }
-    }
-});
-
-
-// Function to edit a record
-function editRecord(category, index) {
-    const categoryData = JSON.parse(localStorage.getItem("categoryData"));
-    const recordValue = categoryData[category][index];
-    const newRecord = prompt("Edit record details:", recordValue);
-
-    if (newRecord !== null && newRecord.trim() !== "") {
-        categoryData[category][index] = newRecord.trim();
-        localStorage.setItem("categoryData", JSON.stringify(categoryData));
-        loadChart();
-    } else if (newRecord === "") {
-        alert("Record cannot be empty.");
-    }
-
-    // After the record is edited and chart refreshed, update badges
-    if (typeof updateCategoryBadges === 'function') {
-        updateCategoryBadges();
-    }
-}
-
-// Function to delete a record
-function deleteRecord(category, index) {
-    const categoryData = JSON.parse(localStorage.getItem("categoryData"));
-    categoryData[category].splice(index, 1); // Remove the record
-    localStorage.setItem("categoryData", JSON.stringify(categoryData));
-    loadChart(); // Refresh chart after deletion
-
-    // After the record is deleted and chart refreshed, update badges
-    if (typeof updateCategoryBadges === 'function') {
-        updateCategoryBadges();
-    }
-}
-
-// Save button click event
-$("#saveRecordBtn").on("click", saveRecord);
-
-// Initial load of chart data
-$(document).ready(function () {
-    loadChart();
-
-    // Set category title dynamically
-    const urlParams = new URLSearchParams(window.location.search);
-    const categoryName = urlParams.get("category");
-    if (categoryName) {
-        $("#categoryTitle").text(categoryName);
-        $("#categoryDescription").text("Displaying records for " + categoryName + ".");
-    }
-});
-
-function showToast(title, message, type) {
-    // Set toast content
-    $("#toastTitle").text(title);
-    $("#toastMessage").text(message);
-    
-    // Set toast header color based on type
-    $("#toastHeader").removeClass("bg-warning bg-danger bg-success");
-    if (type === "warning") {
-        $("#toastHeader").addClass("bg-warning text-dark");
-    } else if (type === "danger") {
-        $("#toastHeader").addClass("bg-danger text-white");
-    } else if (type === "success") {
-        $("#toastHeader").addClass("bg-success text-white");
-    }
-    
-    // Get the toast element
-    const toastElement = document.getElementById('recordToast');
-    const toast = new bootstrap.Toast(toastElement, {
-        delay: 4000 // Auto-hide after 4 seconds
-    });
-
-    // Debugging
-    console.log("Toast initialized:", toast);
-
-    // Show the toast
-    toast.show();
-}
-
-// Function to save record to localStorage
-function saveRecord() {
-    const category = $("#categorySelect").val();
-    const record = $("#recordInput").val().trim();
-
-    if (record === "") {
-        alert("Please enter record details.");
-        return;
-    }
-
-    const categoryData = JSON.parse(localStorage.getItem("categoryData"));
-    categoryData[category].push(record);
-    localStorage.setItem("categoryData", JSON.stringify(categoryData));
-
-    $("#recordInput").val(""); // Clear input field
-    loadChart(); // Refresh chart
-    
-    // Show toast notification for saved record
-    showToast("Record Saved", `Successfully added new record to ${category}`, "success");
-}
-
+/**
+ * Handles editing a record
+ * @param {String} category - Category name
+ * @param {Number} index - Record index
+ */
 function editRecord(category, index) {
     const categoryData = JSON.parse(localStorage.getItem("categoryData"));
     if (!categoryData || !categoryData[category]) {
@@ -289,17 +210,24 @@ function editRecord(category, index) {
         localStorage.setItem("categoryData", JSON.stringify(categoryData));
         loadChart();
 
-        console.log("Showing toast..."); // Debugging
         showToast("Record Updated", `Successfully updated record in ${category}`, "warning");
+        
+        // Update badges if function exists
+        if (typeof updateCategoryBadges === 'function') {
+            updateCategoryBadges();
+        }
     } else if (newRecord === "") {
         alert("Record cannot be empty.");
     }
 }
 
-// Function to delete a record
+/**
+ * Handles deleting a record
+ * @param {String} category - Category name
+ * @param {Number} index - Record index
+ */
 function deleteRecord(category, index) {
     const categoryData = JSON.parse(localStorage.getItem("categoryData"));
-    const recordValue = categoryData[category][index];
     
     // Confirm deletion
     if (confirm(`Are you sure you want to delete this record?`)) {
@@ -309,10 +237,86 @@ function deleteRecord(category, index) {
         
         // Show toast notification for delete
         showToast("Record Deleted", `Successfully deleted record from ${category}`, "danger");
+        
+        // Update badges if function exists
+        if (typeof updateCategoryBadges === 'function') {
+            updateCategoryBadges();
+        }
     }
 }
 
-// Logout functionality
-$("#logoutBtn").on("click", function () {
-    window.location.href = "index.html";
+/**
+ * Shows a toast notification
+ * @param {String} title - Toast title
+ * @param {String} message - Toast message
+ * @param {String} type - Toast type (success/warning/danger)
+ */
+function showToast(title, message, type) {
+    // Set toast content
+    $("#toastTitle").text(title);
+    $("#toastMessage").text(message);
+    
+    // Set toast header color based on type
+    $("#toastHeader").removeClass("bg-warning bg-danger bg-success");
+    if (type === "warning") {
+        $("#toastHeader").addClass("bg-warning text-dark");
+    } else if (type === "danger") {
+        $("#toastHeader").addClass("bg-danger text-white");
+    } else if (type === "success") {
+        $("#toastHeader").addClass("bg-success text-white");
+    }
+    
+    // Get the toast element and initialize Bootstrap toast
+    const toastElement = document.getElementById('recordToast');
+    const toast = new bootstrap.Toast(toastElement, {
+        delay: 4000 // Auto-hide after 4 seconds
+    });
+
+    // Show the toast
+    toast.show();
+}
+
+/**
+ * Sets up the category page based on URL parameters
+ */
+function setupCategoryPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryName = urlParams.get("category");
+
+    if (categoryName) {
+        $("#categoryTitle").text(categoryName);
+        $("#categoryDescription").text("Displaying records for " + categoryName + ".");
+
+        // Configure category dropdown to only allow the specified category
+        const allowedCategory = categoryName;
+        $("#categorySelect option").each(function () {
+            if ($(this).val() !== allowedCategory) {
+                $(this).prop("disabled", true); // Disable other options
+            } else {
+                $(this).prop("selected", true); // Select the allowed category
+            }
+        });
+
+        // Disable the entire select to prevent changes
+        $("#categorySelect").prop("disabled", true);
+
+        // Security check: Redirect to dashboard for invalid category
+        if (!["Patient Records", "Doctor Profiles", "Appointments", "Emergency Cases"].includes(allowedCategory)) {
+            alert("Invalid category selected. Redirecting to dashboard.");
+            window.location.href = "badges_lab.html";
+        }
+    }
+}
+
+// Initialize functionality when document is ready
+$(document).ready(function () {
+    initializeLocalStorage();
+    loadChart();
+    setupCategoryPage();
+    
+    // Set up event handlers
+    $("#saveRecordBtn").on("click", saveRecord);
+    $("#logoutBtn").on("click", function () {
+        window.location.href = "index.html";
+    });
 });
