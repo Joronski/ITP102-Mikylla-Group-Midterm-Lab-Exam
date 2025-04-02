@@ -1,3 +1,5 @@
+/* Global Styles
+-------------------------------------------------- */
 * {
     box-sizing: border-box;
 }
@@ -9,11 +11,15 @@ body {
     padding: 0;
 }
 
+/* Typography
+-------------------------------------------------- */
 h1 {
     color: #50C878; 
     font-weight: 500;
 }
 
+/* Header Components
+-------------------------------------------------- */
 .logo-header {
     display: flex; 
     justify-content: center; 
@@ -29,12 +35,26 @@ h1 {
     width: 100%;
 }
 
+.smaller-logo {
+    max-width: 100px; 
+    width: auto;
+    height: auto;
+}
+
+/* Content Containers
+-------------------------------------------------- */
 .text-container {
     max-width: 800px;
     padding-left: 15px;
     text-align: justify;
 }
 
+.container {
+    width: 100%;
+}
+
+/* Image Styling 
+-------------------------------------------------- */
 .larger-doctors-img {
     max-width: 500px; 
     width: 100%;
@@ -48,58 +68,19 @@ h1 {
     transform: scale(1.02);
 }
 
-.smaller-logo {
-    max-width: 100px; 
-    width: auto;
-    height: auto;
-}
-
-.card {
-    width: 100%;
-    max-width: 900px; 
-    margin: 0 auto; 
-    height: auto;
-    background-color: #ffffff;
-    border: 1px solid #50C878; 
-    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.2); 
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.card-2 {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    overflow: hidden;
-    word-wrap: break-word;
-    padding: 20px;
+img.img-center {
+    display: block;
     margin: 0 auto;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    width: 100%;
+    max-width: 700px; 
+    height: auto;
+    border-radius: 20px; 
+    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.3); 
 }
 
-.card-2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.card-2 .card-title {
-    font-weight: 600;
-    font-size: 1.25rem;
-}
-
-.card-2 .card-text {
-    font-size: 0.95rem;
-    color: #555;
-}
-
-.card-2 .card-body {
-    max-height: 400px; 
-    overflow-y: auto;
-}
-
+/* Card Components
+-------------------------------------------------- */
+/* Base card styles shared between card types */
 .card, .card-2 {
     width: 100%;
     max-width: 900px;
@@ -112,15 +93,40 @@ h1 {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.card-2 .list-group {
-    margin-top: 10px;
-    padding: 0;
+/* Primary card style */
+.card {
+    height: auto;
+}
+
+/* Secondary card style with hover effects */
+.card-2 {
+    max-width: 700px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.card-2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Card content styling */
+.card-2 .card-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.card-2 .card-text {
+    font-size: 0.95rem;
+    color: #555;
 }
 
 .card-2 .card-body {
-    max-height: none; 
+    max-height: none;
 }
 
+/* List Group Styling
+-------------------------------------------------- */
 .list-group {
     margin-top: 10px;
     padding: 0;
@@ -165,17 +171,14 @@ h1 {
     max-width: 90%; 
 }
 
-img.img-center {
+/* Record Text Styling */
+.record-text {
+    text-align: justify;
     display: block;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 700px; 
-    height: auto;
-    border-radius: 20px; 
-    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.3); 
 }
 
-/* Carousel Concept Implementation */
+/* Carousel Styling
+-------------------------------------------------- */
 .carousel-item img {
     width: 150px;
     height: 150px;
@@ -188,7 +191,8 @@ img.img-center {
     padding: 20px;
 }
 
-/* Styling for Chart Grid */
+/* Chart Components
+-------------------------------------------------- */
 #recordsChart {
     display: flex;
     flex-direction: column; 
@@ -205,11 +209,10 @@ img.img-center {
     margin-bottom: 10px;
     flex: 1 1 100%;
 }
-.record-text {
-    text-align: justify;
-    display: block;
-}
 
+/* Category List Styling
+-------------------------------------------------- */
+/* Base styles for category list elements */
 #categoryList, #categoryList a, #categoryList li {
     width: 100%;
     margin-bottom: 10px;
@@ -217,8 +220,15 @@ img.img-center {
     border-left: 4px solid #0B6E4F;
     border-radius: 6px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Hover state for category items */
 #categoryList a:hover, #categoryList li:hover {
     background: rgba(11, 110, 79, 0.9);
     color: #fff;
@@ -226,55 +236,15 @@ img.img-center {
     box-shadow: 0 6px 12px rgba(11, 110, 79, 0.3);
 }
 
-#categoryList a, #categoryList li {
-    font-size: 18px;
-    margin-bottom: 8px;
-    background-color: #D1F2EB; 
-    border-left: 4px solid #0B6E4F; 
-    padding: 12px;
-    border-radius: 6px;
-}
-
+/* Link-specific styles */
 #categoryList a {
-    font-size: 18px;
-    margin-bottom: 8px;
-    background: rgba(255, 255, 255, 0.1); 
-    border-left: 4px solid #0B6E4F;
-    padding: 12px;
-    border-radius: 8px;
     color: #0B6E4F;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#categoryList a:hover {
-    background: rgba(11, 110, 79, 0.9); 
-    color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(11, 110, 79, 0.3); 
-}
-
-#categoryList li {
-    font-size: 18px;
-    margin-bottom: 8px;
-    background-color: #D1F2EB; 
-    border-left: 4px solid #0B6E4F; 
-    padding: 12px;
-    border-radius: 6px;
-}
-
-#categoryList a, #categoryList li {
-    font-size: 18px;
-    margin-bottom: 8px;
-    background: rgba(255, 255, 255, 0.1); 
-    border-left: 4px solid #0B6E4F; 
-    padding: 12px;
-    border-radius: 8px;
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 4px 8px rgba(11, 110, 79, 0.1); 
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
+/* UI Elements
+-------------------------------------------------- */
+/* Badge styling */
 .badge {
     font-size: 14px;
     padding: 8px 12px;
@@ -283,6 +253,7 @@ img.img-center {
     border-radius: 12px;
 }
 
+/* Button styling */
 .btn-primary {
     background-color: #50C878; 
     border-color: #50C878;
@@ -293,11 +264,13 @@ img.img-center {
     border-color: #0B6E4F;
 }
 
+/* Form control focus state */
 .form-control:focus {
     border-color: #50C878;
     box-shadow: 0 0 5px rgba(80, 200, 120, 0.5);
 }
 
+/* Logout button styling */
 #logoutBtn {
     background-color: #dc3545; 
     border-color: #dc3545;
@@ -311,8 +284,8 @@ img.img-center {
     border-color: #bd2130;
 }
 
-/* Responsive Layout */
-
+/* Responsive Layout
+-------------------------------------------------- */
 /* Small Devices: Phones (max-width: 576px) */
 @media (max-width: 576px) {
     .container {
