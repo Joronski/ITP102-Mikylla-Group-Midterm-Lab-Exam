@@ -1,3 +1,8 @@
+/**
+ * category.js - Handles category-specific functionality for medical records system
+ * Manages dynamic category descriptions, input hints, and localStorage operations
+ */
+
 // Define category descriptions and input hints dynamically
 const categoryDescriptions = {
     "Patient Records": {
@@ -14,11 +19,76 @@ const categoryDescriptions = {
     },
     "Emergency Cases": {
         description: "Handles critical emergency cases and triage information for urgent care.",
-        inputHint: "Enter emergency details or case description for quick triage. <br>`Emergrncy Details: [Details] or Case Description: [Description]`"
+        inputHint: "Enter emergency details or case description for quick triage. <br>`Emergency Details: [Details] or Case Description: [Description]`" // Fixed typo: "Emergrncy" -> "Emergency"
     }
 };
 
-// Run script after the document loads
+/**
+ * Initialize categories in localStorage if not already set
+ * Creates empty arrays for each category
+ */
+function initializeCategories() {
+    if (!localStorage.getItem("categoryData")) {
+        const initialData = {
+            "Patient Records": [],
+            "Doctor Profiles": [],
+            "Appointments": [],
+            "Emergency Cases": []
+        };
+        localStorage.setItem("categoryData", JSON.stringify(initialData));
+    }
+}
+
+/**
+ * Retrieves category data from localStorage
+ * @returns {Object} Category data object
+ */
+function getCategoryData() {
+    return JSON.parse(localStorage.getItem("categoryData")) || {};
+}
+
+/**
+ * Saves category data to localStorage
+ * @param {Object} data - Category data to save
+ */
+function saveCategoryData(data) {
+    localStorage.setItem("categoryData", JSON.stringify(data));
+}
+
+/**
+ * Sets up the category page based on URL parameters
+ * Configures UI elements according to the selected category
+ */
+function loadCategoryPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryName = urlParams.get("category");
+    
+    if (categoryName) {
+        $("#categoryTitle").text(categoryName);
+        $("#categoryDescription").text("Displaying records for " + categoryName + ".");
+        
+        // Configure category selection dropdown to only allow the specified category
+        $("#categorySelect option").each(function () {
+            if ($(this).val() !== categoryName) {
+                $(this).prop("disabled", true); // Disable other options
+            } else {
+                $(this).prop("selected", true); // Select the allowed category
+            }
+        });
+        
+        // Disable the entire select dropdown to prevent changes
+        $("#categorySelect").prop("disabled", true);
+        
+        // Security check: Redirect to dashboard if invalid category
+        const validCategories = ["Patient Records", "Doctor Profiles", "Appointments", "Emergency Cases"];
+        if (!validCategories.includes(categoryName)) {
+            alert("Invalid category selected. Redirecting to dashboard.");
+            window.location.href = "badges_lab.html";
+        }
+    }
+}
+
+// Set up category page content when document loads
 $(window).on('load', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const categoryName = urlParams.get('category')?.trim();
@@ -39,65 +109,11 @@ $(window).on('load', function () {
         $("#categoryTitle").text("Category Not Found");
         $("#categoryDescription").text("Please select a valid category from the dashboard.");
 
-        // Hide input and disable actions if invalid category
+        // Disable input and buttons for invalid categories
         $("#recordInput").prop("disabled", true);
         $("#saveRecordBtn").prop("disabled", true);
     }
 });
-
-// Initialize categories in localStorage if not set
-function initializeCategories() {
-    if (!localStorage.getItem("categoryData")) {
-        const initialData = {
-            "Patient Records": [],
-            "Doctor Profiles": [],
-            "Appointments": [],
-            "Emergency Cases": []
-        };
-        localStorage.setItem("categoryData", JSON.stringify(initialData));
-    }
-}
-
-// Function to get category data from localStorage
-function getCategoryData() {
-    return JSON.parse(localStorage.getItem("categoryData")) || {};
-}
-
-// Function to save category data to localStorage
-function saveCategoryData(data) {
-    localStorage.setItem("categoryData", JSON.stringify(data));
-}
-
-// Load category data for the current page if applicable
-function loadCategoryPage() {
-    // Set category title dynamically
-    const urlParams = new URLSearchParams(window.location.search);
-    const categoryName = urlParams.get("category");
-    
-    if (categoryName) {
-        $("#categoryTitle").text(categoryName);
-        $("#categoryDescription").text("Displaying records for " + categoryName + ".");
-        
-        // Disable select and allow only the specified category dynamically
-        $("#categorySelect option").each(function () {
-            if ($(this).val() !== categoryName) {
-                $(this).prop("disabled", true); // Disable other options
-            } else {
-                $(this).prop("selected", true); // Select the allowed category
-            }
-        });
-        
-        // Disable the entire select to prevent changes
-        $("#categorySelect").prop("disabled", true);
-        
-        // Prevent invalid category access and redirect
-        const validCategories = ["Patient Records", "Doctor Profiles", "Appointments", "Emergency Cases"];
-        if (!validCategories.includes(categoryName)) {
-            alert("Invalid category selected. Redirecting to dashboard.");
-            window.location.href = "badges_lab.html";
-        }
-    }
-}
 
 // Initialize on document ready
 $(document).ready(function() {
